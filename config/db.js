@@ -5,14 +5,7 @@ const mongoose = require('mongoose');
 const connectDB = async () => {
     try {
         // Attempt to connect to MongoDB using the provided URI or fallback to localhost
-        const conn = await mongoose.connect(
-            process.env.ATLAS_URI || 'mongodb://localhost:27017/lost-and-found',
-            {
-                useNewUrlParser: true, // Use the new URL parser
-                useUnifiedTopology: true, // Use the new server discovery and monitoring engine
-            }
-        );
-
+        const conn = await mongoose.connect(process.env.ATLAS_URI || 'mongodb://localhost:27017/lost-and-found');
         // Log successful connection
         console.log(`MongoDB Connected: ${conn.connection.host}`);
     } catch (error) {
