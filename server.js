@@ -1,14 +1,9 @@
-// server.js
-
 // Import required modules
 const express = require('express');
 require('dotenv').config(); // Load environment variables from .env file
 
 const connectDB = require('./config/db');
 const itemRoutes = require('./routes/itemRoutes');
-
-// Connect to MongoDB
-connectDB();
 
 const app = express();
 
@@ -36,6 +31,22 @@ app.use((err, req, res, next) => {
 
 // Start the server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+
+// Wrap the server startup logic in an async function
+const startServer = async () => {
+    try {
+        // Await the database connection
+        await connectDB();
+        
+        // Start the server after successful DB connection
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    } catch (error) {
+        console.error('Failed to connect to the database', error);
+        process.exit(1); // Exit the process with failure
+    }
+};
+
+// Call the async function to start the server
+startServer();

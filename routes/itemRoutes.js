@@ -30,14 +30,14 @@ router.put('/:id', updateItem);
 router.delete('/:id', deleteItem);
 
 // Optional: A route to get ALL items (claimed and unclaimed)
-// Uncomment the following block if needed
+// You can uncomment the following block if needed
 // @desc    View all items
 // @route   GET /api/items
-// router.get('/', async (req, res) => {
+//  router.get('/', async (req, res) => {
 //     try {
-//         const items = await require('../models/Item').find({}).sort({ dateFound: -1 });
+//         const items = await require('../models/item').find({}).sort({ dateFound: -1 });
 //         res.json(items);
-//     } catch (err) {
+//      } catch (err) {
 //         res.status(500).json({ message: 'Server Error' });
 //     }
 // });
